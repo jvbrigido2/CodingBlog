@@ -35,5 +35,24 @@ public class CategoriesController : ControllerBase
 
         return Ok(response);
     }
+    [HttpGet]
+    public async Task<IActionResult> GetAllCategories()
+    {
+        var categories = await _repository.GetAllCategoriesAsync();
+
+        var response = new List<CategoryDto>();
+
+        foreach(var category in categories)
+        {
+            var categoryDto = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                ImageUrl = category.ImageUrl,
+            };
+            response.Add(categoryDto);
+        }
+        return Ok(response);
+    }
 
 }
