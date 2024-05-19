@@ -2,7 +2,7 @@
 
 namespace CodingBlog.API.Repositories.Interfaces;
 
-public interface ICreateCategoryRepository
+public interface ICategoryRepository
 {
 
     public Task<Category> CreateCategoryAsync(Category category);

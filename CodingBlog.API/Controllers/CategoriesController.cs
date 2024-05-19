@@ -1,6 +1,5 @@
 ﻿using CodingBlog.API.Models.Domain;
-using CodingBlog.API.Models.DTOs.Requests;
-using CodingBlog.API.Models.DTOs.Responses.CategoryResponses;
+using CodingBlog.API.Models.DTOs.Category;
 using CodingBlog.API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +8,15 @@ namespace CodingBlog.API.Controllers;
 [ApiController]
 public class CategoriesController : ControllerBase
 {
-    private readonly ICreateCategoryRepository _repository;
+    private readonly ICategoryRepository _repository;
     
-    public CategoriesController(ICreateCategoryRepository repository)
+    public CategoriesController(ICategoryRepository repository)
     {
         _repository = repository;
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateCategory(CreateCategoryDtoRequest request)
+    public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
     {
         var category = new Category
         {
@@ -27,7 +26,7 @@ public class CategoriesController : ControllerBase
 
         await _repository.CreateCategoryAsync(category);
 
-        var response = new CreateCategoryDtoResponse
+        var response = new CategoryDto
         {
             Id = category.Id,
             Name = category.Name,

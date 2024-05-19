@@ -4,16 +4,16 @@ using CodingBlog.API.Repositories.Interfaces;
 
 namespace CodingBlog.API.Repositories.Implementation;
 
-public class CreateCategoryRepository : ICreateCategoryRepository
+public class CategoryRepository : ICategoryRepository
 {
     private readonly AppDbContext _context;
 
-    public CreateCategoryRepository(AppDbContext context)
+    public CategoryRepository(AppDbContext context)
     {
         _context = context;
     }
 
-    async Task<Category> ICreateCategoryRepository.CreateCategoryAsync(Category category)
+    async Task<Category> ICategoryRepository.CreateCategoryAsync(Category category)
     {
         await _context.AddAsync(category);
         await _context.SaveChangesAsync();
